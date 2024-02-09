@@ -1,25 +1,95 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 using DesafioProjetoHospedagem.Models;
+
 
 Console.OutputEncoding = Encoding.UTF8;
 
-// Cria os modelos de hóspedes e cadastra na lista de hóspedes
+string tipoBasica = "";
+int capacidade = 0;
+int valorDiaria = 0;
+
+string tipoIntermediaria = "";
+int capacidadeI = 0;
+int valorDiariaI = 0;
+
+string tipoPremium = "";
+int capacidadeP = 0;
+int valorDiariaP = 0;
+
+string Responsavel = "";
+int pessoasHospedadas = 0;
+
 List<Pessoa> hospedes = new List<Pessoa>();
 
-Pessoa p1 = new Pessoa(nome: "Hóspede 1");
-Pessoa p2 = new Pessoa(nome: "Hóspede 2");
 
-hospedes.Add(p1);
-hospedes.Add(p2);
+Reserva rs = new Reserva();
+Suite sb = new Suite(tipoBasica, valorDiaria);
+SuiteIntermediaria si = new SuiteIntermediaria(tipoIntermediaria, valorDiariaI);
+SuitePremium sp = new SuitePremium(tipoPremium,valorDiariaP);
 
-// Cria a suíte
-Suite suite = new Suite(tipoSuite: "Premium", capacidade: 2, valorDiaria: 30);
+string opcao = string.Empty;
+bool exibirMenu = true;
 
-// Cria uma nova reserva, passando a suíte e os hóspedes
-Reserva reserva = new Reserva(diasReservados: 5);
-reserva.CadastrarSuite(suite);
-reserva.CadastrarHospedes(hospedes);
+while (exibirMenu)
+{
+    Console.Clear();
 
-// Exibe a quantidade de hóspedes e o valor da diária
-Console.WriteLine($"Hóspedes: {reserva.ObterQuantidadeHospedes()}");
-Console.WriteLine($"Valor diária: {reserva.CalcularValorDiaria()}");
+    Console.WriteLine("Seja Bem - Vindo Ao Nosso Sistema De Hotelária.");
+    Console.WriteLine("Digite o número correspondente a Suíte que você deseja: ");
+
+    Console.WriteLine("1 - Suíte Básica \n\n Descrição:");
+    Console.WriteLine("- Cama de Solteiro");
+    Console.WriteLine("- TV com canais abertos");
+    Console.WriteLine("- Banheiro comum");
+    Console.WriteLine("- Wifi Com 10 Mega De Velocidade");
+    Console.WriteLine("- Sem Varanda \n");
+
+
+    Console.WriteLine("2 - Suíte Intermediária \n\n Descrição:");
+    Console.WriteLine("- Cama de Casal");
+    Console.WriteLine("- Tv com Filmes e Séries");
+    Console.WriteLine("- Banheiro Médio Com Banheira");
+    Console.WriteLine("- Wifi Com 40 Mega De Velocidade");
+    Console.WriteLine("- Varanda Com Vista Para Cidade\n");
+
+
+    Console.WriteLine("3 - Suíte Premium \n\n Descrição:");
+    Console.WriteLine("- Cama De Casal Grande");
+    Console.WriteLine("- TV Com Qualquer Tipo De Conteúdo Liberado");
+    Console.WriteLine("- Banheiro Grande Com Banheira E Hidromassagem");
+    Console.WriteLine("- FrigoBar Com Bebidas E Comidas Liberadas");
+    Console.WriteLine("- Wifi Com 150 Mega De Velocidade");
+    Console.WriteLine("- Varanda Grande Com Vista Pra Praia");
+
+
+switch (Console.ReadLine())
+{
+    case"1":
+    sb.EscolherSuiteBasica();
+    break;
+
+    case"2":
+    si.EscolherSuiteIntermediaria();
+    break;
+
+    case"3":
+    sp.EscolherSuitePremium();
+    break;
+
+    case"4":
+    exibirMenu = false;
+    break;
+
+    default:
+    Console.WriteLine("Opção Inválida");
+    break;
+
+}
+
+Console.WriteLine("Pressione uma tecla para continuar");
+Console.ReadLine();
+
+}
+
+Console.WriteLine("o programa se encerrou");
